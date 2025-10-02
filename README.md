@@ -13,4 +13,5 @@ You'll then want to change directory to the directory holding the code.  Again, 
 Yes, I'm aware code on the desktop is a bad idea, but here we are anyway!
 
 Finally, run the code with Python, which will be:
-`python dice-bot.py` in your command prompt.
+`python dice-bot.py`
+in your command prompt.
