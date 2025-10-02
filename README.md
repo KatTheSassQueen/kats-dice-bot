@@ -1,6 +1,14 @@
 # Kat's Dice Bot
 A discord dice bot that is made by me and meant for dice rolling...and music and some fun social things too.
 
+## Prior to Running:
+You will need to obtain some crucial information.
+(If you know me, then you can get mine from me.  OTHERWISE!)
+- Discord Bot Token
+- Spotify Developer Client ID
+- Spotify Developer Client Secret
+These must be placed at the top (for spotify, in the global variable section) or bottom (for discord, literally the last line except comments).
+
 ## How to Use:
 I usually use this with a Windows command prompt, but any way you can open it that runs it perpetually in the background should work.
 
