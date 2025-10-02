@@ -45,9 +45,9 @@ class Greet(commands.Cog):
                         "Oh good, do I get to punch his wife? - Kat",
                         "Fight later, existential crisis now? Sounds good! I end my turn. - Will  NO! - Skel",
                         "Some day soon we'll turn that sun into a snowcone. - Day",
-                        "The Moon could be from accounting. - Matt",
+                        "The Moon could be from accounting. - Maya",
                         "One French person is worth one foosball table. Scratch that. One French person is worth two foosball tables. - Homeboy",
-                        "Mankey's Paw curls - Matt",
+                        "Mankey's Paw curls - Maya",
                         "You cannot command word Tax Evasion. - Kat",
                         "OK, Mr. Sister Sir. - Day",
                         "I like my woman like I like my pizza. Hot and depressing. - Day",
@@ -61,7 +61,7 @@ class Greet(commands.Cog):
                         "My God Complex is 100% unrelated to my dick. - Ct",
                         "What are some other veggies...do you want an apple? - Zombie",
                         "We should make friendship bracelets with Anubis' spinal cord! :D - Homeboy",
-                        "I was gonna say so you don't look weird, but I think we're well past that. - Joker  **Frog Stance** - Matt",
+                        "I was gonna say so you don't look weird, but I think we're well past that. - Joker  **Frog Stance** - Maya",
                         "I'm not going to lie to a child. - Chris  Not even to save another friend from vore? - Will",
                         "I'd like to think SOME people appreciate me. - Kat  Who and when?  I'd like to meet them. - Skel",
                         "Not Italian, Italians don't exist. - Grav",
@@ -95,7 +95,7 @@ class Greet(commands.Cog):
                      "You express your heart truthfully and it shows in all of the best ways.",
                      "You've got a creativity that makes spending time around you a joy!",
                      "Honestly, you are a wonderful bean and no one can convince me otherwise."]
-        matt_array = ["You have such a great imagination and way of realizing that imagination. ~~Also nice ass~~",
+        maya_array = ["You have such a great imagination and way of realizing that imagination. ~~Also nice ass~~",
                       "You’re a great and inspiring DM.",
                       "You're one of the strongest people I know, and you continue to find ways to get stronger. I'm happy to know you as a person and that I get to witness you evolve as a person.",
                       "You’re the one who tends to take a first step. You tend to wonder who you are, but that's normal. You are a wonderful person and steadfast in many regards. You are also probably one of the best players in a roleplay sense.",
@@ -177,12 +177,12 @@ class Greet(commands.Cog):
                 indarray.append(ind)
             ind = np.random.choice(indarray)
             output = kat_array[ind]
-        elif username == "mehttaur":
+        elif username == "mayamerlina":
             for i in range(0,100):
-                ind = np.random.randint(len(matt_array))
+                ind = np.random.randint(len(maya_array))
                 indarray.append(ind)
             ind = np.random.choice(indarray)
-            output = matt_array[ind]
+            output = maya_array[ind]
         elif username == "homeboy64":
             for i in range(0,100):
                 ind = np.random.randint(len(homeboy_array))
