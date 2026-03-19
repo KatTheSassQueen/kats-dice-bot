@@ -9,6 +9,12 @@ You will need to obtain some crucial information.
 - Spotify Developer Client Secret
 These must be placed at the top (for spotify, in the global variable section) or bottom (for discord, literally the last line except comments).
 
+## Replacing the CENSORING
+I'm not giving you my filepath/username/etc.  So I've removed a few things and this will **NOT** run straight downloaded!  You will need to replace the following (search "[INSERT" to find easily in the python code!):
+- Spotify Developer Client ID and Client Secret (These are found at the top of the file!)
+- The filepath to where you have the FFMPEG executable saved (about halfway down, in the midst of the music play commands for YT and Local)
+- The bot token (very bottom of the code)
+
 ## How to Use:
 I usually use this with a Windows command prompt, but any way you can open it that runs it perpetually in the background should work.
 
