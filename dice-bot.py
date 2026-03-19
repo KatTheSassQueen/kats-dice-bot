@@ -18,8 +18,8 @@ link = ""
 context = ""
 source = ""
 
-CLIENT_ID = "[INSERT SPOTIFY DEV CLIENT ID]"
-CLIENT_SECRET = "[INSERT SPOTIFY CLIENT SECRET]"
+CLIENT_ID = "[INSERT CLIENT ID]"
+CLIENT_SECRET = "[INSERT CLIENT SECRET]"
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=CLIENT_ID,
                                                                client_secret=CLIENT_SECRET))
         
@@ -359,7 +359,7 @@ class Music(commands.Cog):
             except AttributeError:#cannot find stream by current itag, as itag not avaliable
                 continue
         global source
-        source = discord.FFmpegPCMAudio(audio, executable="C:\\Users\\advan\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\discord\\ffmpeg\\bin\\ffmpeg.exe",**FFMPEG_OPTIONS)  # converts the youtube audio source into a source discord can use
+        source = discord.FFmpegPCMAudio(audio, executable="[INSERT FFMPEG PATH]",**FFMPEG_OPTIONS)  # converts the youtube audio source into a source discord can use
         source = discord.PCMVolumeTransformer(source,volume=0.5)
         if ctx.voice_client.is_playing():
             await self.stop(ctx)#My own function to stop the bot from playing the music if music is already playing.
@@ -395,7 +395,7 @@ class Music(commands.Cog):
         context = ctx
         FFMPEG_OPTIONS = {'options': '-vn -filter:a "volume=0.1"'}#optimised settings for ffmpeg for streaming
         global source
-        source = discord.FFmpegPCMAudio(filepath,executable="C:\\Users\\advan\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\discord\\ffmpeg\\bin\\ffmpeg.exe",**FFMPEG_OPTIONS)
+        source = discord.FFmpegPCMAudio(filepath,executable="[INSERT FFMPEG PATH]",**FFMPEG_OPTIONS)
         source = discord.PCMVolumeTransformer(source,volume=0.5)
         if ctx.voice_client.is_playing():
             await self.stop(ctx)#My own function to stop the bot from playing the music if music is already playing.
@@ -997,5 +997,4 @@ async def on_ready():
     await bot.add_cog(Roll(bot))
     await bot.add_cog(Greet(bot))
 
-bot.run("[INSERT YOUR BOT TOKEN HERE]")  # Yup you can run your own instance by generating your own.
-# Or if you're Maya you've got my token already.
+bot.run("[INSERT SECRET]")
