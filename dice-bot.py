@@ -3,13 +3,20 @@ import discord
 import math 
 import numpy as np
 import re
-import pytubefix as pytube
+import yt_dlp as ydl
 import spotipy
 
 from discord.ext import tasks,commands
 from spotipy.oauth2 import SpotifyClientCredentials
 
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-vn -filter:a "volume=0.05"'}#optimised settings for ffmpeg for streaming
+
+ydl_opts = {
+    'format': 'bestaudio/best',
+    'quiet': True,
+    'no_warnings': True,
+}
+downloader = ydl.YoutubeDL(ydl_opts)
 
 loopsong = "False"
 loc = "False"
@@ -20,6 +27,8 @@ source = ""
 
 CLIENT_ID = "[INSERT CLIENT ID]"
 CLIENT_SECRET = "[INSERT CLIENT SECRET]"
+ffmpeg_path = "[INSERT FFMPEG PATH]"
+bot_secret = "[INSERT BOT SECRET]"
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=CLIENT_ID,
                                                                client_secret=CLIENT_SECRET))
         
@@ -321,14 +330,9 @@ class Music(commands.Cog):
             track = sp.track(track_id)
             search_term = f"{track['name']} - {track['artists'][0]['name']}"
         if search_term != "":
-            search = pytube.Search(search_term)
-            results = search.results
-            if len(results) > 0:
-                vid_id = results[0].video_id
-                yt_link = "https://www.youtube.com/watch?v=" + str(vid_id)
-                await self.yt(ctx, yt_link)
-            else:
-                await ctx.send("Track not found on YouTube (yes I know it's a spotify link)")
+            ytsearch = downloader.extract_info(f"ytsearch: {search_term}", download=False)
+            url = ytsearch['url']
+            await self.yt(ctx, url)
         else:
             await ctx.send("Cannot locate Spotify track.")
  
@@ -350,16 +354,14 @@ class Music(commands.Cog):
             delete = "False"
         global context
         context = ctx
-        itag_list = [141,140,139,251,171,250,249]#These are the lists of itags that can be played by ffmpeg.
-        for itag in itag_list:
-            try:
-                audio = pytube.YouTube(str(url)).streams.get_by_itag(itag).url#get stream url
-                print("itag: " + str(itag))
-                break
-            except AttributeError:#cannot find stream by current itag, as itag not avaliable
-                continue
+        try:
+            audio = downloader.extract_info(str(url), download=False)
+            audio_url = audio['url']
+            print(f"Playing {audio['title']}")
+        except AttributeError:#cannot find stream by current itag, as itag not avaliable
+            print("Error finding stream.")
         global source
-        source = discord.FFmpegPCMAudio(audio, executable="[INSERT FFMPEG PATH]",**FFMPEG_OPTIONS)  # converts the youtube audio source into a source discord can use
+        source = discord.FFmpegPCMAudio(audio_url, executable=ffmpeg_path,**FFMPEG_OPTIONS)  # converts the youtube audio source into a source discord can use
         source = discord.PCMVolumeTransformer(source,volume=0.5)
         if ctx.voice_client.is_playing():
             await self.stop(ctx)#My own function to stop the bot from playing the music if music is already playing.
@@ -395,7 +397,7 @@ class Music(commands.Cog):
         context = ctx
         FFMPEG_OPTIONS = {'options': '-vn -filter:a "volume=0.1"'}#optimised settings for ffmpeg for streaming
         global source
-        source = discord.FFmpegPCMAudio(filepath,executable="[INSERT FFMPEG PATH]",**FFMPEG_OPTIONS)
+        source = discord.FFmpegPCMAudio(filepath,executable=ffmpeg_path,**FFMPEG_OPTIONS)
         source = discord.PCMVolumeTransformer(source,volume=0.5)
         if ctx.voice_client.is_playing():
             await self.stop(ctx)#My own function to stop the bot from playing the music if music is already playing.
@@ -997,4 +999,4 @@ async def on_ready():
     await bot.add_cog(Roll(bot))
     await bot.add_cog(Greet(bot))
 
-bot.run("[INSERT SECRET]")
+bot.run(bot_secret)
