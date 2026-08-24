@@ -29,3 +29,13 @@ Yes, I'm aware code on the desktop is a bad idea, but here we are anyway!
 Finally, run the code with Python, which will be:
 `python dice-bot.py`
 in your command prompt.
+
+## Dependencies
+You will need to ensure the following libraries are installed on your Python path:
+- asyncio
+- discord
+- math
+- numpy
+- re
+- yt_dlp
+- spotipy
